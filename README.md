@@ -5,6 +5,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#viewbinding-databinding">ViewBinding DataBinding</a></li>
+    <li><a href="#basic-layout">Basic Layout</a></li>
   </ol>
 </details>
 <br>
@@ -168,4 +169,139 @@ class MainActivityViewModel : ViewModel(){
 
 다음 프로그램은 editText에 입력하면 바로바로 TextView에 적용이 됩니다.
 
-## 
+<br>
+
+## Basic-Layout
+
+target : Layout이 많아지면 하드웨어가 버거워하기 때문에 각각의 Layout을 잘 활용하여 간소하게 만드는게 목적이다.
+
+<br>
+
+#### 1. RelativeLayout
+
+Component 들을 상대적으로 묶어주는 Layout (Parent 와도 묶임)<br>
+먼저쓰는 Component일수록 뒤로간다.<br>
+
+
+``` relative layout
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="#FFC107"
+        />
+    <View
+        android:id="@+id/red_view"
+        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#F44336"
+        />
+    <View
+        android:id="@+id/green_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#4CAF50"
+        android:layout_toRightOf="@+id/red_view"
+        />
+
+</RelativeLayout>
+```
+
+![re](https://user-images.githubusercontent.com/29851990/154704353-86abbdbd-91b5-4566-b7db-7404dd2547d7.PNG)
+
+<br>
+
+#### 2. Linear Layout
+
+Horizontal, Vertical의 종류가 있고, 그의 기준으로 정렬되게 배치해주는 Layout<br>
+weight를 주어 배치할 수 있고, weight가 없다면 적용된 길이만큼 가져감
+
+``` linear layout
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#F44336"/>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:background="#FFEB3B"/>
+
+    <View
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#3F51B5"/>
+
+</LinearLayout>
+```
+
+![Lineaar](https://user-images.githubusercontent.com/29851990/154705772-a806348f-8280-47a4-935c-5029648c9c7b.PNG)
+
+#### 3. Constraint Layout
+
+서로 앵커로 연결되어있고, 계층이 하나인 Layout<br>
+화면이 Portrait과 Landscape를 왔다 갔다해도 다른 Layout처럼 완전히 메모리에 Delete 되었다가 다시 생성하지않고 비율만 바꿈
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+    <View
+        android:id="@+id/red_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#F44336"
+        />
+    <View
+        android:id="@+id/blue_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#3F51B5"
+        app:layout_constraintTop_toBottomOf="@+id/red_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <View
+        android:id="@+id/pink_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#E91E63"
+        app:layout_constraintTop_toBottomOf="@+id/blue_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+![Const](https://user-images.githubusercontent.com/29851990/154708509-608943de-6ba1-4984-8bc8-220e5555e31a.PNG)
+
