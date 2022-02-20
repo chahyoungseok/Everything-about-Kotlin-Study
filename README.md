@@ -325,11 +325,54 @@ weight를 주어 배치할 수 있고, weight가 없다면 적용된 길이만�
 
 Fragment를 사용한다면 필수적으로 들어간 FragmentManager를 알아보려한다.<br>
 정의로는 "앱 Fragment에서 작업을 추가, 삭제 또는 교체하고 백 스택에 추가하는 등의 작업을 실행하는 클래스" 라고 표현되어있다.<br>
+간단하게 Activity와 Fragment 사이에서 서로를 이어주는 역할이다.
 
-Access 방법으로는 FragmentManager 선언 후 supportFragmentManager 를 통해 할당할 수 있고,<br>
-UI Layout은 아래의 2가지 방법이 존재한다.
+역할
+ - Fragment를 추가, 삭제, 교체등의 작업 및 Fragment transaction을 Fragment 백스택에 저장
+ - Activity와의 통신 (Fragment 내의 구성요소들 하나하나에 접근할 수 있도록 해줌)
 
-![fragment-host](https://user-images.githubusercontent.com/29851990/154828184-d14fbb21-fda9-4d59-a3a9-9e30f2343127.png)
+<br>
 
-위의 예시 2가지는 BottomNavigationView를 활용하며, 각화면은 별도의 Fragment로 구현됩니다.
+#### Fragment Transaction
+ 
+ Fragment 추가, 삭제, 교체 뿐아니라 Fragment 백스택 관리, Fragment 전환, 애니매이션 설정 등
+ 
+``` fragment access
+class MainActivity : AppCompatActivity() {
+    private lateinit var main_binding : ActivityMainBinding
 
+    private lateinit var fragmentManager : FragmentManager
+    private lateinit var transaction : FragmentTransaction
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        main_binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(main_binding.root)
+        
+        // fragmentManager 할당
+        fragmentManager = supportFragmentManager
+        
+        // fragmentTransaction 시작
+        transaction = fragmentManager.beginTransaction()
+
+        // fragment transaction 마무리 
+        transaction.commit()
+        
+        // fragment 추가
+        transaction.add(R.id.fragment_container, new fragment 이름)
+        
+        // fragment 교체
+        transaction.replace(R.id.fragment_container, new fragment 이름)
+        
+        // fragment 제거
+        transaction.remove(fragment 이름)
+        
+        // 백스택에 저장
+        transaction.addToBackStack(null)
+        
+        // transaction 마무리
+        transaction.commit()
+    }
+}
+```
+ 
