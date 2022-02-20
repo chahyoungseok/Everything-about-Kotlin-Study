@@ -6,6 +6,7 @@
   <ol>
     <li><a href="#viewbinding-databinding">ViewBinding DataBinding</a></li>
     <li><a href="#basic-layout">Basic Layout</a></li>
+    <li><a href="#fragment">Fragment</a></li>
   </ol>
 </details>
 <br>
@@ -304,4 +305,15 @@ weight를 주어 배치할 수 있고, weight가 없다면 적용된 길이만�
 ```
 
 ![Const](https://user-images.githubusercontent.com/29851990/154708509-608943de-6ba1-4984-8bc8-220e5555e31a.PNG)
+
+## Fragment
+
+화면의 크기가 다양해짐에 따라 여러개의 화면요소를 원하는 수요가 증가<br>
+여러개의 Fragment를 조합하여 Activity가 출력하는 한 화면의 UI를 표햔할 수 있다.<br>
+하나의 Fragment를 다른 Activity에 재사용할 수 있다<br>
+
+![다운로드](https://user-images.githubusercontent.com/29851990/154827068-e469ca92-0e6b-4450-96e7-ac6c1fd25a2d.png)
+
+다음과 같이 화면이 큰 테블릿에서는 하나의 Activity에 2개의 Fragment를 넣었고,<br>
+화면이 작은 휴대폰에는 하나의 Activity마다 하나의 Fragment를 넣으며 구현합니다.
 
