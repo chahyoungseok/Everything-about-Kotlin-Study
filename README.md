@@ -306,6 +306,8 @@ weight를 주어 배치할 수 있고, weight가 없다면 적용된 길이만�
 
 ![Const](https://user-images.githubusercontent.com/29851990/154708509-608943de-6ba1-4984-8bc8-220e5555e31a.PNG)
 
+<br>
+
 ## Fragment
 
 화면의 크기가 다양해짐에 따라 여러개의 화면요소를 원하는 수요가 증가<br>
@@ -316,4 +318,18 @@ weight를 주어 배치할 수 있고, weight가 없다면 적용된 길이만�
 
 다음과 같이 화면이 큰 테블릿에서는 하나의 Activity에 2개의 Fragment를 넣었고,<br>
 화면이 작은 휴대폰에는 하나의 Activity마다 하나의 Fragment를 넣으며 구현합니다.
+
+<br>
+
+### FragmentManager
+
+Fragment를 사용한다면 필수적으로 들어간 FragmentManager를 알아보려한다.<br>
+정의로는 "앱 Fragment에서 작업을 추가, 삭제 또는 교체하고 백 스택에 추가하는 등의 작업을 실행하는 클래스" 라고 표현되어있다.<br>
+
+Access 방법으로는 FragmentManager 선언 후 supportFragmentManager 를 통해 할당할 수 있고,<br>
+UI Layout은 아래의 2가지 방법이 존재한다.
+
+![fragment-host](https://user-images.githubusercontent.com/29851990/154828184-d14fbb21-fda9-4d59-a3a9-9e30f2343127.png)
+
+위의 예시 2가지는 BottomNavigationView를 활용하며, 각화면은 별도의 Fragment로 구현됩니다.
 
