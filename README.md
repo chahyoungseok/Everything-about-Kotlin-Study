@@ -393,3 +393,5 @@ class MainActivity : AppCompatActivity() {
 ```
  
 #### Fragment Lifecycle
+
+![다운로드](https://user-images.githubusercontent.com/29851990/154988019-439b1be3-7774-4471-a809-510315c84b99.png)
