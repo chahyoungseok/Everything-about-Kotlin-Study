@@ -331,6 +331,22 @@ Fragment를 사용한다면 필수적으로 들어간 FragmentManager를 알아�
  - Fragment를 추가, 삭제, 교체등의 작업 및 Fragment transaction을 Fragment 백스택에 저장
  - Activity와의 통신 (Fragment 내의 구성요소들 하나하나에 접근할 수 있도록 해줌)
 
+![image](https://user-images.githubusercontent.com/29851990/154977586-8fc64526-be65-4763-a162-7875bfad9a77.png)
+
+ - 위의 그림처럼 각 호스트는 FragmentManager를 가지고 있다. 여기에 접근해서 유저에게 보여지는 Fragment를 조작한다.
+ - 그리고 가장 바깥의 host activity는 child fragment들을 관리하기위해서 supportFragmentManager로 fragmentManager에 접근한다.
+ - host fragment는 자식 fragment를 관리하기 위해 childfragmentManager를 사용하고, 자기를 관리하는 FragmentManager에 접근하기 위해 parentFragmentManager를 사용한다.
+
+<br>
+
+FragmentManager의 또다른 개념
+ - fragmentManager는 fragment 백스택을 관리한다. 이 작업은 FragmentTransaction을 commit하며 수행된다.
+ - 유저가 백버튼을 누르거나, FragmentManager.popBackStack() 을 호출하면 가장위에있는 FragmentTransaction이 스택에서 pop된다.
+ - 예를 들어 Bottom Navigation A에서 B로 이동한 다음 백버튼을 눌렀을 때, A -> B transaction이 스택에서 pop 되면서 B -> A 로 작동
+ - 만일 더이상 pop할 transaction이 없고, childfragment가 없다면 activity로 거슬러 올라간다.
+ - popBackStack을 하기 직전에 수행한 transaction을 addToBackStack 하지않았다면 transaction이 반대로 처리되지 않는다.
+ - 따라서 transaction을 pop하고 싶다면 add를 먼저 수행해야한다. 
+
 <br>
 
 #### Fragment Transaction
@@ -376,3 +392,4 @@ class MainActivity : AppCompatActivity() {
 }
 ```
  
+#### Fragment Lifecycle
